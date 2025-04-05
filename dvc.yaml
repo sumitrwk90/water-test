@@ -1,0 +1,32 @@
+stages:
+  data_collection:
+    cmd: python src/data/1_data_collection.py
+    deps:
+    - src/data/1_data_collection.py
+    params:
+    - data_collection.test_size
+    outs:
+    - data/raw
+  data_preparation:
+    cmd: python src/data/2_data_preparation.py
+    deps:
+    - data/raw
+    - src/data/2_data_preparation.py
+    outs:
+    - data/processed
+  model_building:
+    cmd: python src/model/3_model_building.py
+    deps:
+    - data/processed
+    - src/model/3_model_building.py
+    params:
+    - model_building.n_estimators
+    outs:
+    - models/model.pkl
+  model_evaluation:
+    cmd: python src/model/4_model_evaluation.py
+    deps:
+    - models/model.pkl
+    - src/model/4_model_evaluation.py
+    metrics:
+    - reports/metrics.json
