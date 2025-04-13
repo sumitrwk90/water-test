@@ -26,21 +26,21 @@ stages:
       nfiles: 2
     - path: src/data/2_data_preparation.py
       hash: md5
-      md5: 1403af8c7b9e4ea8c6731a74622a702c
-      size: 2091
+      md5: 477337bc2156570f6d536a696bb04884
+      size: 2079
     outs:
     - path: data/processed
       hash: md5
-      md5: 09d7d1468d5c1e6739769af7e3154438.dir
-      size: 546137
+      md5: e34c84b2d0f2a75442271cd6c5779b7c.dir
+      size: 546895
       nfiles: 2
   model_building:
     cmd: python src/model/3_model_building.py
     deps:
     - path: data/processed
       hash: md5
-      md5: 09d7d1468d5c1e6739769af7e3154438.dir
-      size: 546137
+      md5: e34c84b2d0f2a75442271cd6c5779b7c.dir
+      size: 546895
       nfiles: 2
     - path: src/model/3_model_building.py
       hash: md5
@@ -52,15 +52,15 @@ stages:
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: 919a5dfaa5e91b542d3008ceb837659b
-      size: 73593668
+      md5: 8a2dc46a6881a2d288dcf355494152ad
+      size: 73644708
   model_evaluation:
     cmd: python src/model/4_model_evaluation.py
     deps:
     - path: models/model.pkl
       hash: md5
-      md5: 919a5dfaa5e91b542d3008ceb837659b
-      size: 73593668
+      md5: 8a2dc46a6881a2d288dcf355494152ad
+      size: 73644708
     - path: src/model/4_model_evaluation.py
       hash: md5
       md5: 77a10356ec7ef5c6a0a27279be37a19f
@@ -68,9 +68,20 @@ stages:
     outs:
     - path: reports/metrics.json
       hash: md5
-      md5: a9f96875e652a7946d30ffe2f094375c
-      size: 150
+      md5: 868c2f4512aa4b200f92a413eaaa500d
+      size: 137
     - path: reports/run_info.json
       hash: md5
-      md5: 2bca633c4b5dab519d987efd1065c874
+      md5: d1c94c4ee9940106124b6d5b9c6d9666
       size: 87
+  model_registration:
+    cmd: python src/model/model_registry.py
+    deps:
+    - path: reports/run_info.json
+      hash: md5
+      md5: d1c94c4ee9940106124b6d5b9c6d9666
+      size: 87
+    - path: src/model/model_registry.py
+      hash: md5
+      md5: bcbad37a74cbc8a4ad885e0540c8ee4d
+      size: 1314

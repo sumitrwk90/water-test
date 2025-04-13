@@ -32,7 +32,13 @@ stages:
     - reports/metrics.json
     outs:
     - reports/run_info.json
-    
+
+  model_registration:
+    cmd: python src/model/model_registry.py
+    deps:
+    - reports/run_info.json
+    - src/model/model_registry.py
+
 params:
 - dvclive/params.yaml
 metrics:
