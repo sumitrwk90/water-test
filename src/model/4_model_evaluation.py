@@ -36,9 +36,13 @@ def load_model(filepath : str) -> None:
 
 def evaluation_model(model, X_test : pd.DataFrame, y_test : pd.Series) -> dict:
     try:
+
+        # dvc tracking config
         params = yaml.safe_load(open("params.yaml", "r"))
         test_size = params["data_collection"]["test_size"]
         n_estimators = params["model_building"]["n_estimators"]
+
+
 
         y_pred = model.predict(X_test)
 
@@ -47,6 +51,8 @@ def evaluation_model(model, X_test : pd.DataFrame, y_test : pd.Series) -> dict:
         recall = recall_score(y_test, y_pred)
         f1score = f1_score(y_test, y_pred)
 
+
+        # dvc exp tracking config
         with Live(save_dvc_exp = True) as live:
             live.log_metric("accuracy", acc)
             live.log_metric("precision", pre)
