@@ -14,16 +14,32 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-dagshub.init(repo_owner='sumitrwk90', repo_name='water-test', mlflow=True)
-
-# Set the experiment name in MLflow
-
-mlflow.set_experiment("DVC PIPELINE ")
-
-# Set the tracking URI for MLflow to log the experiment in DagsHub
-mlflow.set_tracking_uri("https://dagshub.com/sumitrwk90/water-test.mlflow") 
+# dagshub.init(repo_owner='sumitrwk90', repo_name='water-test', mlflow=True)
+# # Set the experiment name in MLflow
+# mlflow.set_experiment("DVC PIPELINE ")
+# # Set the tracking URI for MLflow to log the experiment in DagsHub
+# mlflow.set_tracking_uri("https://dagshub.com/sumitrwk90/water-test.mlflow") 
 
 
+# Key based authentication
+import os
+# Load dagshub token
+dagshub_token = os.getenv("DAGSHUB_TOKEN")
+if not dagshub_token:
+    raise EnvironmentError("DAGSHUB_TOKEN environment variable is not set")
+
+os.environ["MLFLOW_TRACKING_USERNAME"]=dagshub_token
+os.environ["MLFLOW_TRACKING_PASSWORD"]=dagshub_token
+
+# Dagshub repository details
+dagshub_url = "https://dagshub.com"
+repo_owner = "sumitrwk90"
+repo_name = "water-test"
+mlflow.set_tracking_uri(f"{dagshub_url}/{repo_owner}/{repo_name}.mlflow")
+mlflow.set_experiment("Final_model")
+
+
+# Load Data
 def load_data(filepath : str) -> pd.DataFrame:
     try:
         return pd.read_csv(filepath)

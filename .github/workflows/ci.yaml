@@ -21,6 +21,8 @@ jobs:
           pip install dvc
 
       - name: Run DVC pipeline
+        env:
+          DAGSHUB_TOKEN:${{secrets.DAGSHUB_TOKEN}}
         run: 
           # Directly run the DVC pipeline without pilling
           dvc repro
