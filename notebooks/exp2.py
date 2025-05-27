@@ -6,25 +6,28 @@ from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
 import mlflow.sklearn
+
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from xgboost import XGBClassifier
+
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
 import pickle
 import dagshub
 from sklearn.model_selection import train_test_split
 
 # Initialize DagsHub integration and set the experiment for MLflow tracking
 dagshub.init(repo_owner='sumitrwk90', repo_name='water-test', mlflow=True)
-mlflow.set_experiment("Experiment 2")  # Set the experiment name
+mlflow.set_experiment("Experiment 27-05-2025")  # Set the experiment name
 mlflow.set_tracking_uri("https://dagshub.com/sumitrwk90/water-test.mlflow")   # Registry URI for model management
 
 # Load the dataset from CSV file and split into training and testing sets
 data = pd.read_csv(r"C:\Users\Lenovo\water-potability-prediction\data_storage\water_potability.csv")
-train_data, test_data = train_test_split(data, test_size=0.20, random_state=42)
+train_data, test_data = train_test_split(data, test_size=0.15, random_state=42)
 
 # Define a function to fill missing values with the median value for each column
 def fill_missing_with_median(df):
