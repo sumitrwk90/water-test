@@ -57,7 +57,8 @@ def main():
         test_size = load_params(params_filepath)
         train_data, test_data = split_data(data, test_size)
 
-        os.makedirs(raw_data_path)
+        if not os.path.exists(raw_data_path):
+            os.makedirs(raw_data_path)
     # os.makedirs(data_path)
 
         save_data(train_data, os.path.join(raw_data_path, "train.csv"))
