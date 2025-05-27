@@ -38,6 +38,17 @@ repo_name = "water-test"
 mlflow.set_tracking_uri(f"{dagshub_url}/{repo_owner}/{repo_name}.mlflow")
 mlflow.set_experiment("Final_model")
 
+# # .env based
+# from dotenv import load_dotenv
+# import os
+
+# load_dotenv()
+# token = os.getenv("DAGSHUB_TOKENS")
+
+# if token is None:
+#     raise EnvironmentError("DAGSHUB_TOKEN environment variable is not set")
+
+
 
 # Load Data
 def load_data(filepath : str) -> pd.DataFrame:
