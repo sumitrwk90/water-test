@@ -15,7 +15,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install dependencies
-        run:
+        run: |
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install dvc
@@ -23,6 +23,6 @@ jobs:
       - name: Run DVC pipeline
         env:
           DAGSHUB_TOKEN: ${{secrets.DAGSHUB_TOKEN}}
-        run: 
+        run: |
           # Directly run the DVC pipeline without pilling
           dvc repro
