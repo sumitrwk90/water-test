@@ -22,7 +22,7 @@ jobs:
 
       - name: Run DVC pipeline
         env:
-          DAGSHUB_TOKEN: ${{secrets.DAGSHUB_TOKEN}}
+          DAGSHUB_TOKENS: ${{secrets.DAGSHUB_TOKENS}}
         run: |
           # Directly run the DVC pipeline without pilling
           dvc repro

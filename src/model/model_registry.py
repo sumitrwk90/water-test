@@ -15,7 +15,7 @@ import dagshub
 # Key based authentication
 import os
 # Load dagshub token
-dagshub_token = os.getenv("DAGSHUB_TOKEN")
+dagshub_token = os.getenv("DAGSHUB_TOKENS")
 if not dagshub_token:
     raise EnvironmentError("DAGSHUB_TOKEN environment variable is not set")
 
