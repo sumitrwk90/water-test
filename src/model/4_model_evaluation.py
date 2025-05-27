@@ -145,15 +145,15 @@ def main():
     try:
         test_data_path = "./data/processed/test_processed.csv"
         model_path = "models/model.pkl"
-        metrics_path = os.path.join("reports", "metrics.json") #"reports/metrics.json"
+        metrics_path = "reports/metrics.json"
         model_name = "Best Model"
 
         test_data = load_data(test_data_path)
         X_test, y_test = prepare_data(test_data)
         model = load_model(model_path)
 
-        if not os.path.exists(metrics_path):
-            os.makedirs(metrics_path)
+        # if not os.path.exists(metrics_path):
+        #     os.makedirs(metrics_path)
 
         # Start MLflow run
         with mlflow.start_run() as run:
