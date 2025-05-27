@@ -145,6 +145,8 @@ def main():
     try:
         test_data_path = "./data/processed/test_processed.csv"
         model_path = "models/model.pkl"
+
+        # Define the path to the metrics file
         metrics_path = "reports/metrics.json"
         model_name = "Best Model"
 
@@ -152,8 +154,8 @@ def main():
         X_test, y_test = prepare_data(test_data)
         model = load_model(model_path)
 
-        # if not os.path.exists(metrics_path):
-        #     os.makedirs(metrics_path)
+        # Ensure the directory exists
+        os.makedirs(os.path.dirname(metrics_path), exist_ok=True)
 
         # Start MLflow run
         with mlflow.start_run() as run:
